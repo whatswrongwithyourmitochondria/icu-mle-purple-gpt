@@ -5,9 +5,9 @@
     type: "object",
     properties: {
       llm_base_url: { type: "string" },
-      nebius_api_key: { type: "string", secret: true },
+      openai_api_key: { type: "string", secret: true },
     },
-    required: ["nebius_api_key"],
+    required: ["openai_api_key"],
     additionalProperties: false,
   },
 
