@@ -1,6 +1,6 @@
 """Tests for the leakage reviewer agent."""
 
-from purple_next.agents.reviewer import review_candidate
+from mle_solver.agents.reviewer import review_candidate
 
 
 class StubLLM:

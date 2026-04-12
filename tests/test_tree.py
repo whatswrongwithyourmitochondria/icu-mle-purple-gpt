@@ -2,10 +2,10 @@
 
 import random
 
-from purple_next.exec.interpreter import ExecResult
-from purple_next.prompts.improve import IMPROVE_HINTS, pick_hint
-from purple_next.tree import Journal, SearchNode, Selector
-from purple_next.tree.ranking import adjusted_review_penalty, hard_leakage_flag, review_penalty
+from mle_solver.exec.interpreter import ExecResult
+from mle_solver.prompts.improve import IMPROVE_HINTS, pick_hint
+from mle_solver.tree import Journal, SearchNode, Selector
+from mle_solver.tree.ranking import adjusted_review_penalty, hard_leakage_flag, review_penalty
 
 
 def _valid_node(node_id, stage, parent_id, branch_root, cv, hold=None, hint_idx=None):

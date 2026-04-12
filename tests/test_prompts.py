@@ -1,6 +1,6 @@
 """Sanity tests for the prompt builders."""
 
-from purple_next.prompts import (
+from mle_solver.prompts import (
     DISPOSITIONS,
     SYSTEM_PROMPT,
     build_debug_prompt,

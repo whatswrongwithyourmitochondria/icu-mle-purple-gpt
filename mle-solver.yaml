@@ -1,7 +1,7 @@
 # ============================================================
-#  purple_next configuration
+#  mle_solver configuration
 #
-#  Read by ``purple_next.config.Config.from_yaml``. Intentionally flat and
+#  Read by ``mle_solver.config.Config.from_yaml``. Intentionally flat and
 #  small — the runner owns the validation protocol, so there's no per-audit
 #  threshold to tune.
 # ============================================================

@@ -1,4 +1,4 @@
-"""A2A agent: parse the incoming task, delegate solving to ``purple_next``."""
+"""A2A agent: parse the incoming task, delegate solving to ``mle-solver``."""
 
 import asyncio
 import base64
@@ -42,7 +42,7 @@ class Agent:
         await updater.update_status(
             state=TaskState.working,
             message=new_agent_text_message(
-                "Competition data ready. Starting purple_next panel..."
+                "Competition data ready. Starting mle-solver panel..."
             ),
         )
 
@@ -50,7 +50,7 @@ class Agent:
         submission_bytes = await loop.run_in_executor(None, run_competition, work_dir)
 
         if submission_bytes is None:
-            raise RuntimeError("purple_next produced no submission")
+            raise RuntimeError("mle-solver produced no submission")
 
         await updater.update_status(
             state=TaskState.working,

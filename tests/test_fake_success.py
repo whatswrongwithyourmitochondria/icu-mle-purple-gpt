@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from purple_next.exec import detect_fake_success
+from mle_solver.exec import detect_fake_success
 
 
 def test_detect_fake_success_flags_constant_submission(tmp_path: Path):

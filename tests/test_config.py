@@ -1,12 +1,12 @@
-"""Tests for purple_next.config — yaml parity + validation."""
+"""Tests for mle-solver.config — yaml parity + validation."""
 
 from pathlib import Path
 
-from purple_next.config import Config
+from mle_solver.config import Config
 
 
 def test_yaml_parses_and_validates():
-    yaml_path = Path(__file__).resolve().parents[1] / "purple_next.yaml"
+    yaml_path = Path(__file__).resolve().parents[1] / "mle-solver.yaml"
     cfg = Config.from_yaml(yaml_path)
     # API key may be blank at rest; ignore that for validation.
     errs = [e for e in cfg.validate() if "api_key" not in e]

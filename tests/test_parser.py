@@ -4,7 +4,7 @@ The direct happy path reads an OUTCOME_JSON line without calling the LLM.
 The fallback path calls a stub LLMClient that returns canned JSON.
 """
 
-from purple_next.agents.parser import parse_outcome
+from mle_solver.agents.parser import parse_outcome
 
 
 class StubLLM:

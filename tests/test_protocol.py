@@ -4,12 +4,12 @@ from pathlib import Path
 
 import pandas as pd
 
-from purple_next.protocol import (
+from mle_solver.protocol import (
     PROTOCOL_JSON,
     SPLIT_CSV,
     prepare_splits,
 )
-from purple_next.protocol.contract import TaskContract
+from mle_solver.protocol.contract import TaskContract
 
 
 def _write_basic_competition(data_dir: Path, n: int = 40) -> None:
