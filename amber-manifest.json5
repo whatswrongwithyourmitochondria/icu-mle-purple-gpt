@@ -21,7 +21,7 @@
 
     env: {
       LLM_BASE_URL: "${config.llm_base_url}",
-      OPENAI_API_KEY: "${config.nebius_api_key}",
+      OPENAI_API_KEY: "${config.openai_api_key}",
     },
 
     network: {
