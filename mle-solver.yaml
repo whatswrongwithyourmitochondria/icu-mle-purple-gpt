@@ -11,8 +11,8 @@ seed: 42
 log_level: INFO
 
 llm:
-  model: Qwen/Qwen3.5-397B-A17B-fast
-  base_url: "https://api.tokenfactory.us-central1.nebius.com/v1/"
+  model: gpt-5.4
+  base_url: "https://api.openai.com/v1"
   api_key: ""
   temperature: 0.6
   max_tokens: 16000
@@ -21,7 +21,7 @@ llm:
 
 search:
   num_drafts: 2              # sibling drafts per seat
-  max_steps: 30              # total nodes per seat (drafts + improve + debug)
+  max_steps: 10              # total nodes per seat (drafts + improve + debug)
   max_parallel: 2            # pipelined workers inside one seat
   pass_k: 3                  # number of isolated seats on the panel
   ucb_explore_c: 1.0         # UCB exploration coefficient for branch selection
@@ -31,7 +31,7 @@ search:
   holdout_fraction: 0.20     # runner-owned dev/holdout split
   n_folds: 3                 # cv folds across dev rows
   dispositions: []           # override default speed/data-first/go-big triplet
-  seat_temperatures: [0.5, 0.6, 0.9]   # one per seat; falls back to llm.temperature if fewer than pass_k
+  seat_temperatures: [0.4, 0.5, 0.8]   # one per seat; falls back to llm.temperature if fewer than pass_k
 
 exec:
   timeout: 1800              # per-node solution.py wall-clock cap
