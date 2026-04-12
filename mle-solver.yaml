@@ -31,7 +31,7 @@ search:
   holdout_fraction: 0.20     # runner-owned dev/holdout split
   n_folds: 3                 # cv folds across dev rows
   dispositions: []           # override default speed/data-first/go-big triplet
-  seat_temperatures: [0.4, 0.5, 0.8]   # one per seat; falls back to llm.temperature if fewer than pass_k
+  seat_temperatures: [0.2, 0.4, 0.7]   # one per seat; falls back to llm.temperature if fewer than pass_k
 
 exec:
   timeout: 1800              # per-node solution.py wall-clock cap
