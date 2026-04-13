@@ -38,7 +38,11 @@ def generate_draft_code(
         disposition=disposition,
         variant=variant,
     )
-    response = llm.chat(messages, temperature=temperature, label=label)
+    response = llm.chat(
+        messages,
+        temperature=temperature,
+        label=label,
+    )
     return llm.extract_python_code(response)
 
 
@@ -70,7 +74,11 @@ def generate_improve_code(
         time_remaining_s=time_remaining_s,
         fraction_used=fraction_used,
     )
-    response = llm.chat(messages, temperature=temperature, label=label)
+    response = llm.chat(
+        messages,
+        temperature=temperature,
+        label=label,
+    )
     code = llm.extract_python_code(response)
     return code or parent_code
 

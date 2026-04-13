@@ -2,7 +2,7 @@
 
 - Heartbeat logging while a call is in flight.
 - Auto-switches between ``max_tokens`` and ``max_completion_tokens``.
-- Auto-omits temperature on reasoning models that reject it.
+- Auto-omits temperature if a provider rejects it.
 - Extracts the longest Python code block from a response.
 """
 
@@ -104,7 +104,13 @@ class LLMClient:
             f"in {time.time() - started:.0f}s: {last_err}"
         )
 
-    def _call(self, messages, temperature, max_tokens, label):
+    def _call(
+        self,
+        messages,
+        temperature,
+        max_tokens,
+        label,
+    ):
         kwargs = (
             {"max_completion_tokens": max_tokens}
             if not self._legacy_max_tokens

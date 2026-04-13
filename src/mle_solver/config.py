@@ -16,11 +16,11 @@ import yaml
 
 @dataclass
 class LLMConfig:
-    model: str = "Qwen/Qwen3.5-397B-A17B-fast"
-    base_url: str = "https://api.tokenfactory.nebius.com/v1/"
+    model: str = "claude-sonnet-4-6"
+    base_url: str = "https://api.anthropic.com/v1/"
     api_key: str = ""
     temperature: float = 0.6
-    max_tokens: int = 16000
+    max_tokens: int = 16384
     timeout: float = 600.0
     max_retries: int = 3
 

@@ -11,18 +11,18 @@ seed: 42
 log_level: INFO
 
 llm:
-  model: gpt-5.4
-  base_url: "https://api.openai.com/v1"
+  model: claude-sonnet-4-6
+  base_url: "https://api.anthropic.com/v1/"
   api_key: ""
   temperature: 0.6
-  max_tokens: 12000
+  max_tokens: 16384
   timeout: 600
   max_retries: 3
 
 search:
   num_drafts: 2              # sibling drafts per seat
   max_steps: 30              # total nodes per seat (drafts + improve + debug)
-  max_parallel: 2            # pipelined workers inside one seat
+  max_parallel: 1            # pipelined workers inside one seat
   pass_k: 3                  # number of isolated seats on the panel
   ucb_explore_c: 1.0         # UCB exploration coefficient for branch selection
   max_debug_attempts_per_node: 2
@@ -31,7 +31,7 @@ search:
   holdout_fraction: 0.20     # runner-owned dev/holdout split
   n_folds: 3                 # cv folds across dev rows
   dispositions: []           # override default speed/data-first/go-big triplet
-  seat_temperatures: [0.2, 0.4, 0.7]   # one per seat; falls back to llm.temperature if fewer than pass_k
+  seat_temperatures: [0.6, 0.7, 0.8]   # one per seat; falls back to llm.temperature if fewer than pass_k
 
 exec:
   timeout: 1800              # per-node solution.py wall-clock cap
