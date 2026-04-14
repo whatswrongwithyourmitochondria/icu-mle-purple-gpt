@@ -16,11 +16,11 @@ import yaml
 
 @dataclass
 class LLMConfig:
-    model: str = "claude-sonnet-4-6"
-    base_url: str = "https://api.anthropic.com/v1/"
+    model: str = "gpt-5.4"
+    base_url: str = "https://api.openai.com/v1"
     api_key: str = ""
     temperature: float = 0.6
-    max_tokens: int = 16384
+    max_tokens: int = 12000
     timeout: float = 600.0
     max_retries: int = 3
 

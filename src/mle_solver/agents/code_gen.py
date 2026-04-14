@@ -41,6 +41,7 @@ def generate_draft_code(
     response = llm.chat(
         messages,
         temperature=temperature,
+        reasoning_effort="medium",
         label=label,
     )
     return llm.extract_python_code(response)
@@ -77,6 +78,7 @@ def generate_improve_code(
     response = llm.chat(
         messages,
         temperature=temperature,
+        reasoning_effort="medium",
         label=label,
     )
     code = llm.extract_python_code(response)

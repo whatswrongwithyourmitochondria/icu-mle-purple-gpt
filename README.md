@@ -80,15 +80,16 @@ Per-column blending:
 
 ## Model, Provider, and Current Parameters
 
-Current setup uses **Claude Sonnet 4.6** via Anthropic's OpenAI-compatible endpoint.
+Current setup uses **OpenAI gpt-5.4** via the OpenAI API.
+Draft and improve generation calls use `reasoning_effort: medium`.
 
 ```yaml
 llm:
-  model: claude-sonnet-4-6
-  base_url: "https://api.anthropic.com/v1/"
+  model: gpt-5.4
+  base_url: "https://api.openai.com/v1"
   api_key: ""
   temperature: 0.6
-  max_tokens: 16384
+  max_tokens: 12000
   timeout: 600
   max_retries: 3
 
@@ -269,7 +270,7 @@ uv run test_assessment.py --green-port 9009 --purple-port 9010 --competition spa
 
 At minimum, set API credentials in `.env`:
 
-- `ANTHROPIC_API_KEY` (Anthropic provider)
+- `OPENAI_API_KEY` (OpenAI provider)
 
 The code also supports provider-based fallback env vars (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`) depending on configured `base_url`.
 

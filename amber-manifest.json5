@@ -5,9 +5,9 @@
     type: "object",
     properties: {
       llm_base_url: { type: "string" },
-      anthropic_api_key: { type: "string", secret: true },
+      openai_api_key: { type: "string", secret: true },
     },
-    required: ["anthropic_api_key"],
+    required: ["openai_api_key"],
     additionalProperties: false,
   },
 
@@ -21,7 +21,7 @@
 
     env: {
       LLM_BASE_URL: "${config.llm_base_url}",
-      ANTHROPIC_API_KEY: "${config.anthropic_api_key}",
+      OPENAI_API_KEY: "${config.openai_api_key}",
     },
 
     network: {

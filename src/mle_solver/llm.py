@@ -62,6 +62,7 @@ class LLMClient:
         messages: list[dict[str, str]],
         *,
         temperature: float | None = None,
+        reasoning_effort: str | None = None,
         max_tokens: int | None = None,
         label: str = "chat",
     ) -> str:
@@ -72,17 +73,29 @@ class LLMClient:
 
         for attempt in range(self.cfg.max_retries):
             try:
-                content = self._call(messages, temp, max_t, label)
+                content = self._call(messages, temp, max_t, label, reasoning_effort)
                 logger.info(f"[llm] <- {label} OK in {time.time() - started:.0f}s chars={len(content)}")
                 return content
             except APIError as e:
                 err = str(e)
+                err_l = err.lower()
                 if "max_tokens" in err and "max_completion_tokens" in err:
                     self._legacy_max_tokens = not self._legacy_max_tokens
                     continue
-                if "temperature" in err.lower() and any(k in err.lower() for k in ("does not support", "only supports", "unsupported")):
+                if "temperature" in err_l and any(k in err_l for k in ("does not support", "only supports", "unsupported")):
                     self._omit_temperature = True
                     continue
+                if "reasoning_effort" in err_l and reasoning_effort is not None:
+                    logger.warning(f"[llm] {label} reasoning_effort unsupported, retrying without it")
+                    reasoning_effort = None
+                    continue
+                if "rate_limit_error" in err_l or "429" in err_l:
+                    reduced = max(512, min(2048, max_t // 2))
+                    if reduced < max_t:
+                        logger.warning(
+                            f"[llm] {label} hit rate limit; reducing max_tokens {max_t} -> {reduced}"
+                        )
+                        max_t = reduced
                 last_err = e
                 wait = min(10 * 2 ** attempt, 60)
                 logger.warning(
@@ -110,13 +123,17 @@ class LLMClient:
         temperature,
         max_tokens,
         label,
+        reasoning_effort: str | None,
     ):
         kwargs = (
             {"max_completion_tokens": max_tokens}
             if not self._legacy_max_tokens
             else {"max_tokens": max_tokens}
         )
-        if not self._omit_temperature and temperature is not None:
+        effort = (reasoning_effort or "").strip().lower()
+        if effort:
+            kwargs["reasoning_effort"] = effort
+        if not self._omit_temperature and temperature is not None and effort in {"", "none"}:
             kwargs["temperature"] = temperature
         with _Heartbeat(label=label):
             resp = self.client.chat.completions.create(
